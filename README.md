@@ -72,10 +72,11 @@ fn main() {
 [tools]
 wasm_bindgen = "0.2.84"
 ```
-* Run website
+* Build, watch and serve the Rust WASM web application and all its assets. Automatically opens in web browser.
 ```bash
-trunk serve
+trunk serve --address=127.0.0.1 --open
 ```
+    * Note: Replace with public IP address to access externally if firewall permissions allow
 
 ### Troubleshooting
 
