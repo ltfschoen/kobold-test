@@ -11,9 +11,9 @@ Testing the capabilities of Kobold library whilst learning Rust.
     rustup update
     cargo update
     ```
-* Switch to latest Rustup
+* Switch to latest "stable" Rustup
     ```bash
-    rustup default nightly-2022-03-22
+    rustup override set stable-x86_64-unknown-linux-gnu
     ```
 * Install Kobold dependencies https://github.com/maciejhirsz/kobold#more-examples
     ```bash

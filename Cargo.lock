@@ -76,7 +76,7 @@ dependencies = [
 [[package]]
 name = "kobold"
 version = "0.5.0"
-source = "git+https://github.com/ltfschoen/kobold.git?rev=d56e8f69d7678040c63d57e93f78d4c3aa35656d#d56e8f69d7678040c63d57e93f78d4c3aa35656d"
+source = "git+https://github.com/maciejhirsz/kobold.git?rev=53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf#53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf"
 dependencies = [
  "console_error_panic_hook",
  "itoa",
@@ -99,7 +99,7 @@ dependencies = [
 [[package]]
 name = "kobold_macros"
 version = "0.5.0"
-source = "git+https://github.com/ltfschoen/kobold.git?rev=d56e8f69d7678040c63d57e93f78d4c3aa35656d#d56e8f69d7678040c63d57e93f78d4c3aa35656d"
+source = "git+https://github.com/maciejhirsz/kobold.git?rev=53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf#53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf"
 dependencies = [
  "arrayvec",
  "beef",
@@ -109,7 +109,7 @@ dependencies = [
 [[package]]
 name = "kobold_qr"
 version = "0.5.0"
-source = "git+https://github.com/ltfschoen/kobold.git?rev=d56e8f69d7678040c63d57e93f78d4c3aa35656d#d56e8f69d7678040c63d57e93f78d4c3aa35656d"
+source = "git+https://github.com/maciejhirsz/kobold.git?rev=53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf#53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf"
 dependencies = [
  "fast_qr",
  "kobold",

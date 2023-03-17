@@ -7,7 +7,6 @@ edition = "2021"
 
 [dependencies]
 # https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#multiple-locations
-# TODO - switch to https://github.com/maciejhirsz/kobold by default when changes merged
-kobold = { version = "0.5.0", git = "https://github.com/ltfschoen/kobold.git", rev = "d56e8f69d7678040c63d57e93f78d4c3aa35656d" }
-kobold_macros = { version = "0.5.0", git = "https://github.com/ltfschoen/kobold.git", rev = "d56e8f69d7678040c63d57e93f78d4c3aa35656d" }
-kobold_qr = { version = "0.5.0", git = "https://github.com/ltfschoen/kobold.git", rev = "d56e8f69d7678040c63d57e93f78d4c3aa35656d" }
+kobold = { version = "0.5.0", git = "https://github.com/maciejhirsz/kobold.git", rev = "53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf" }
+kobold_macros = { version = "0.5.0", git = "https://github.com/maciejhirsz/kobold.git", rev = "53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf" }
+kobold_qr = { version = "0.5.0", git = "https://github.com/maciejhirsz/kobold.git", rev = "53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf" }
