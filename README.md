@@ -1,7 +1,14 @@
 ### Log
 
 * Install Rust https://doc.rust-lang.org/cargo/getting-started/installation.html
+* Update Rust
+    ```bash
+    rustup update
+    ```
 * Install Kobold dependencies https://github.com/maciejhirsz/kobold#more-examples
+    ```bash
+    rustup target add wasm32-unknown-unknown
+    ```
 * Created project
 ```bash
 cargo new kobold-test --bin
