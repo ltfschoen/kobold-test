@@ -6,4 +6,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-kobold = "0.4.1"
+# https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#multiple-locations
+# TODO - switch to https://github.com/maciejhirsz/kobold by default when changes merged
+kobold = { version = "0.5.0", git = "https://github.com/ltfschoen/kobold.git", rev = "d56e8f69d7678040c63d57e93f78d4c3aa35656d" }
+kobold_macros = { version = "0.5.0", git = "https://github.com/ltfschoen/kobold.git", rev = "d56e8f69d7678040c63d57e93f78d4c3aa35656d" }
+kobold_qr = { version = "0.5.0", git = "https://github.com/ltfschoen/kobold.git", rev = "d56e8f69d7678040c63d57e93f78d4c3aa35656d" }

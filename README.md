@@ -1,13 +1,36 @@
-### Log
+# Kobold Test
 
+Testing the capabilities of Kobold library whilst learning Rust.
+
+### Initial Setup Log
+
+* Added example rust-toolchain.toml
 * Install Rust https://doc.rust-lang.org/cargo/getting-started/installation.html
-* Update Rust
+* Update Rust and Cargo
     ```bash
     rustup update
+    cargo update
+    ```
+* Switch to latest Rustup
+    ```bash
+    rustup default nightly-2022-03-22
     ```
 * Install Kobold dependencies https://github.com/maciejhirsz/kobold#more-examples
     ```bash
     rustup target add wasm32-unknown-unknown
+    ```
+* Switch to default [Rustup Profile](https://rust-lang.github.io/rustup/concepts/profiles.html)
+    ```bash
+    rustup set profile default
+    ```
+* Check Rustup Configuration
+    ```bash
+    rustup toolchain list
+    rustup show
+    ```
+* Add additional components
+    ```bash
+    rustup component add rustc cargo rustfmt rust-std rust-docs clippy miri rust-src llvm-tools-preview
     ```
 * Created project
 ```bash
@@ -53,3 +76,24 @@ wasm_bindgen = "0.2.84"
 ```bash
 trunk serve
 ```
+
+### Troubleshooting
+
+* The following was used to test if all binaries and examples and packages specified could be installed.
+```bash
+cargo install --bins --examples --git=https://github.com/ltfschoen/kobold --branch=master --rev=2617dc3e4cff227d68e8a7ae883d8aa7cec6de6f kobold_counter_example kobold_csv_editor_example kobold_hello_world_example kobold_interval_example kobold_list_example kobold_qrcode_example kobold_stateful_example kobold_todomvc_example --verbose
+```
+However the Cargo.toml file was updated as follows instead so it would run without error when `trunk serve`
+```
+[dependencies]
+# https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#multiple-locations
+kobold = { version = "0.5.0", git = "https://github.com/ltfschoen/kobold.git", rev = "d56e8f69d7678040c63d57e93f78d4c3aa35656d" }
+kobold_macros = { version = "0.5.0", git = "https://github.com/ltfschoen/kobold.git", rev = "d56e8f69d7678040c63d57e93f78d4c3aa35656d" }
+kobold_qr = { version = "0.5.0", git = "https://github.com/ltfschoen/kobold.git", rev = "d56e8f69d7678040c63d57e93f78d4c3aa35656d" }
+```
+
+* rust-toolchain file
+    * It still isn't possible to install the toolchain and components specified in a rust-toolchain.toml file because. See
+        * https://github.com/rust-lang/rustup/issues/2686
+        * https://github.com/actions-rust-lang/setup-rust-toolchain/blob/main/action.yml#L11
+        * https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file
