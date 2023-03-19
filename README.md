@@ -78,6 +78,21 @@ trunk serve --address=127.0.0.1 --open
 ```
     * Note: Replace with public IP address to access externally if firewall permissions allow
 
+### Docker
+
+* Runs server inside Docker container where build artifacts dist/ and target/ are generated inside the Docker container.
+    * FIXME: Changes are not propogated from host machine to container. Hot reloading does not work yet
+* Install and run [Docker](https://www.docker.com/)
+* Run in Docker container
+```bash
+./docker-dev.sh
+```
+
+* Kill Docker container
+```
+docker stop kobold-test && docker rm kobold-test
+```
+
 ### Troubleshooting
 
 * The following was used to test if all binaries and examples and packages specified could be installed.
