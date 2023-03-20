@@ -74,7 +74,7 @@ wasm_bindgen = "0.2.84"
 ```
 * Build, watch and serve the Rust WASM web application and all its assets. Automatically opens in web browser.
 ```bash
-trunk serve --address=127.0.0.1 --open
+trunk --config ./trunk/Trunk.toml serve --address=127.0.0.1 --open
 ```
     * Note: Replace with public IP address to access externally if firewall permissions allow
 
@@ -84,7 +84,7 @@ trunk serve --address=127.0.0.1 --open
 * Install and run [Docker](https://www.docker.com/)
 * Run in Docker container
 ```bash
-./docker-dev.sh
+./scripts/docker-dev.sh
 ```
 * View website http://<PUBLIC_IP_ADDRESS>:8080
 
@@ -99,7 +99,7 @@ docker stop kobold-test && docker rm -f kobold-test
 ```bash
 cargo install --bins --examples --git=https://github.com/ltfschoen/kobold --branch=master --rev=2617dc3e4cff227d68e8a7ae883d8aa7cec6de6f kobold_counter_example kobold_csv_editor_example kobold_hello_world_example kobold_interval_example kobold_list_example kobold_qrcode_example kobold_stateful_example kobold_todomvc_example --verbose
 ```
-However the Cargo.toml file was updated as follows instead so it would run without error when `trunk serve`
+However the Cargo.toml file was updated as follows instead so it would run without error with `trunk serve`
 ```
 [dependencies]
 # https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#multiple-locations
