@@ -86,6 +86,7 @@ trunk serve --address=127.0.0.1 --open
 ```bash
 ./docker-dev.sh
 ```
+* View website http://<PUBLIC_IP_ADDRESS>:8080
 
 * Kill Docker container
 ```

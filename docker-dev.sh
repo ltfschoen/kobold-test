@@ -52,9 +52,7 @@ if [ "$PUBLIC_IP_ADDRESS" != "" ]; then
     # run docker container and execute command
     # FIXME - does not update website when make changes in src/ directory
     RUST_BACKTRACE=1 docker run --net host --privileged --user root --rm -it --name kobold-test \
-        -v './dist:/kobold-test/dist' \
         -v './src:/kobold-test/src' \
-        -v './target:/kobold-test/target' \
         kobold-test trunk serve --address=${PUBLIC_IP_ADDRESS} --watch dist --watch target --watch src
 
     # run docker container daemon in background and access container using nonroot user
@@ -68,6 +66,6 @@ if [ "$PUBLIC_IP_ADDRESS" != "" ]; then
     CONTAINER_ID=docker ps --filter name=kobold-test --format 'json' | jq -r '.ID'
     printf "\n*** Public IP address: http://${PUBLIC_IP_ADDRESS}:${PORT_TRUNK}\n***\n";
     printf "\n*** Running in Docker container ID: ${CONTAINER_ID}"
-    # printf "\n*** Docker volumes for container ID:"
-    # docker inspect -f '{{ .Mounts }}' ${CONTAINER_ID}
+    printf "\n*** Docker volumes for container ID:"
+    docker inspect -f '{{ .Mounts }}' ${CONTAINER_ID}
 fi
