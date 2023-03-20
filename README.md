@@ -80,8 +80,7 @@ trunk serve --address=127.0.0.1 --open
 
 ### Docker
 
-* Runs server inside Docker container where build artifacts dist/ and target/ are generated inside the Docker container.
-    * FIXME: Changes are not propogated from host machine to container. Hot reloading does not work yet
+* Runs server inside Docker container. Build artifacts dist/ and target/ are generated inside the Docker container with hot reloading.
 * Install and run [Docker](https://www.docker.com/)
 * Run in Docker container
 ```bash
@@ -90,7 +89,7 @@ trunk serve --address=127.0.0.1 --open
 
 * Kill Docker container
 ```
-docker stop kobold-test && docker rm kobold-test
+docker stop kobold-test && docker rm -f kobold-test
 ```
 
 ### Troubleshooting

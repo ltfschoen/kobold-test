@@ -49,6 +49,3 @@ RUN /bin/sh -c set -eux && \
 
 USER nonroot
 EXPOSE 8080
-# docker inspect -f '{{ .Mounts }}' <DOCKER_CONTAINER_ID>
-VOLUME ["/${NAME_PROJECT}/target"]
-
