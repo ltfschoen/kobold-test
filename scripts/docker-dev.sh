@@ -50,9 +50,9 @@ printf "\n*** Finished building Docker container.\n"
 
 if [ "$PUBLIC_IP_ADDRESS" != "" ]; then
     # run docker container and execute command
-    RUST_BACKTRACE=1 docker run --net host --privileged --user root --rm -it --name kobold-test \
-        -v "${PATH_TO_PROJECT_ROOT}/src:/kobold-test/src" \
-        kobold-test trunk --config=${PATH_TO_PROJECT_ROOT}/trunk/Trunk.toml serve --address=${PUBLIC_IP_ADDRESS}
+    # RUST_BACKTRACE=1 docker run --net host --privileged --user root --rm -it --name kobold-test \
+    #     -v "${PATH_TO_PROJECT_ROOT}/src:/kobold-test/src" \
+    #     kobold-test trunk --config=${PATH_TO_PROJECT_ROOT}/trunk/Trunk.toml serve --address=${PUBLIC_IP_ADDRESS}
     # FIXME - no output when run after `docker run` but container id not defined before
     # CONTAINER_ID=$(docker ps --filter name=kobold-test --format 'json' | jq -r '.ID') && \
     # docker inspect -f '{{ .Mounts }}' ${CONTAINER_ID} && \
@@ -63,8 +63,10 @@ if [ "$PUBLIC_IP_ADDRESS" != "" ]; then
     # run docker container daemon in background and access container using nonroot user
     # and enter password and enter commands in container shell
     # FIXME - does not work with nonroot user `failed to start `cargo metadata`: Permission denied (os error 13)`
-    # RUST_BACKTRACE=1 docker run --net host --privileged --user root --rm -it -d --name kobold-test kobold-test
-    # docker exec -it --user nonroot kobold-test /bin/bash
+    RUST_BACKTRACE=1 docker run --net host --privileged --user root --rm -it -d --name kobold-test \
+        -v "${PATH_TO_PROJECT_ROOT}/src:/kobold-test/src" kobold-test
+
+    # docker exec -it --user root kobold-test /bin/bash
     # run in docker container shell
     # trunk --config=${PATH_TO_PROJECT_ROOT}/trunk/Trunk.toml serve --address=${PUBLIC_IP_ADDRESS}
 fi

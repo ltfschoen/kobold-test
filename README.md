@@ -66,6 +66,10 @@ fn main() {
     });
 }
 ```
+* Install dependencies
+```bash
+cargo install --path .
+```
 * Install [Trunk](https://trunkrs.dev/#getting-started)
 * Create Trunk.toml & Paste:
 ```bash
@@ -91,6 +95,11 @@ trunk --config ./trunk/Trunk.toml serve --address=127.0.0.1 --open
 * Kill Docker container
 ```
 docker stop kobold-test && docker rm -f kobold-test
+```
+
+* Kill all Docker containers, images, and volumes
+```
+docker system prune --all --volumes
 ```
 
 ### Troubleshooting
