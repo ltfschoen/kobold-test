@@ -1,4 +1,14 @@
+use std::str::FromStr;
+use gloo_storage::{LocalStorage, Storage};
+
 use std::ops::{Deref, DerefMut, Range};
+
+const KEY: &str = "kobold.invoice.example";
+
+#[derive(Debug)]
+pub enum Error {
+    FailedToParseEntry,
+}
 
 #[derive(PartialEq, Eq, Clone, Copy)]
 pub enum Editing {
@@ -11,6 +21,13 @@ pub struct State {
     pub editing: Editing,
     pub name: String,
     pub table: Table,
+    pub entry: Entry,
+    pub entry_editing: bool,
+}
+
+pub struct Entry {
+    pub description: String,
+    pub entry_editing: bool,
 }
 
 pub struct Table {
@@ -24,9 +41,74 @@ pub enum Text {
     Owned(Box<str>),
 }
 
+impl Entry {
+    fn mock() -> Self {
+        "my address\nyes".parse().unwrap()
+    }
+
+    fn read(from: &str) -> Option<Self> {
+        // FIXME
+        let description = from.to_string();
+
+        Some(Entry {
+            description,
+            entry_editing: false,
+        })
+    }
+
+    // FIXME
+    fn write(&self, storage: &mut String) {
+        storage.extend([
+            &self.description,
+            "\n",
+        ]);
+    }
+}
+
+impl FromStr for Entry {
+    type Err = Error;
+
+    fn from_str(input: &str) -> Result<Self, Error> {
+        let vec = input.lines().collect::<Vec<_>>();
+        let description = vec[0].to_string();
+        let entry_editing = vec[1].to_string().parse::<bool>().unwrap();
+        // FIXME - use `match` not `unwrap`
+        // match entry_editing {
+        //     Ok(_) => {
+        //         Ok(Entry { description, entry_editing })
+        //     },
+        //     Err(_) => {
+        //         Error::FailedToParseEntry
+        //     }
+        // };
+
+        Ok(Entry { description, entry_editing })
+    }
+}
+
 impl Default for Text {
     fn default() -> Self {
         Text::Insitu(0..0)
+    }
+}
+
+impl Default for State {
+    fn default() -> Self {
+        let mut entry = String::new();
+        if let Some(storage) = LocalStorage::raw().get(KEY).ok() {
+            entry = storage.unwrap();
+        }
+
+        State {
+            editing: Editing::None,
+            name:  "<no file>".to_owned(),
+            table: Table::mock(),
+            entry: Entry {
+                description: "<no entry>".to_owned(),
+                entry_editing: false,
+            },
+            entry_editing: false,
+        }
     }
 }
 
@@ -36,6 +118,49 @@ impl State {
             editing: Editing::None,
             name: "<no file>".to_owned(),
             table: Table::mock(),
+            entry: Entry {
+                description: "<no entry>".to_owned(),
+                entry_editing: false,
+            },
+            entry_editing: false,
+        }
+    }
+
+    #[inline(never)]
+    pub fn store(&self) {
+        let capacity = self.entry.description.len() + 3;
+
+        let mut storage = String::with_capacity(capacity);
+
+        self.entry.write(&mut storage);
+
+        LocalStorage::raw().set_item(KEY, &storage).ok();
+    }
+
+    pub fn edit_entry(&mut self) {
+        self.entry_editing = true;
+
+        self.store();
+    }
+
+    pub fn add(&mut self, description: String) {
+        self.entry = Entry {
+            description,
+            entry_editing: false,
+        };
+
+        self.store();
+    }
+
+    pub fn update(&mut self, description: String) {
+        let entry = &mut self.entry;
+        let entry_editing = &mut self.entry_editing;
+
+        *entry_editing = false;
+
+        if description != entry.description {
+            entry.description = description;
+            self.store();
         }
     }
 }

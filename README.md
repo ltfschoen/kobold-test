@@ -2,6 +2,12 @@
 
 Testing the capabilities of Kobold library whilst learning Rust.
 
+### Credit
+
+The invoice example in this repository is heavily based on a combination of:
+* https://github.com/maciejhirsz/kobold/tree/master/examples/todomvc
+* https://github.com/maciejhirsz/kobold/tree/master/examples/csv_editor
+
 ### Initial Setup Log
 
 * Added example rust-toolchain.toml
@@ -122,3 +128,6 @@ kobold_qr = { version = "0.5.0", git = "https://github.com/ltfschoen/kobold.git"
         * https://github.com/rust-lang/rustup/issues/2686
         * https://github.com/actions-rust-lang/setup-rust-toolchain/blob/main/action.yml#L11
         * https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file
+
+* VSCode: Cannot attach to process due to System Integrity Protection
+    * Unable to debug in VSCode with wasm-bindgen https://stackoverflow.com/questions/67032785/how-to-debug-rust-and-webassembly-program-with-vscode-and-codelldb
