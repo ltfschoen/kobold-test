@@ -74,7 +74,7 @@ fn main() {
 ```
 * Install dependencies
 ```bash
-cargo install --path .
+cargo install --path=./
 ```
 * Install [Trunk](https://trunkrs.dev/#getting-started)
 * Create Trunk.toml & Paste:

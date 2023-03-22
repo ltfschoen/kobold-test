@@ -128,7 +128,7 @@ fn EntryInput(state: &Hook<State>) -> impl Html + '_ {
     html! {
         <input
             .new-invoice
-            placeholder="<Enter address>"
+            placeholder="<Enter biller address>"
             onchange={state.bind(|state, event| {
                 let input = event.target();
                 let value = input.value();

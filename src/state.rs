@@ -8,6 +8,7 @@ const KEY: &str = "kobold.invoice.example";
 #[derive(Debug)]
 pub enum Error {
     FailedToParseEntry,
+    ParseBoolError,
 }
 
 #[derive(PartialEq, Eq, Clone, Copy)]
@@ -47,7 +48,6 @@ impl Entry {
     }
 
     fn read(from: &str) -> Option<Self> {
-        // FIXME
         let description = from.to_string();
 
         Some(Entry {
@@ -56,7 +56,6 @@ impl Entry {
         })
     }
 
-    // FIXME
     fn write(&self, storage: &mut String) {
         storage.extend([
             &self.description,
@@ -71,18 +70,16 @@ impl FromStr for Entry {
     fn from_str(input: &str) -> Result<Self, Error> {
         let vec = input.lines().collect::<Vec<_>>();
         let description = vec[0].to_string();
-        let entry_editing = vec[1].to_string().parse::<bool>().unwrap();
-        // FIXME - use `match` not `unwrap`
-        // match entry_editing {
-        //     Ok(_) => {
-        //         Ok(Entry { description, entry_editing })
-        //     },
-        //     Err(_) => {
-        //         Error::FailedToParseEntry
-        //     }
-        // };
-
-        Ok(Entry { description, entry_editing })
+        let entry_editing = vec[1].to_string().parse::<bool>().or_else(|_i| Err(Error::ParseBoolError));
+        let _entry_editing = match entry_editing {
+            Ok(entry_editing) => {
+                Ok(Entry { description, entry_editing })
+            },
+            Err(_) => {
+                Err(Error::FailedToParseEntry)
+            }
+        };
+        Err(Error::FailedToParseEntry)
     }
 }
 
@@ -94,9 +91,9 @@ impl Default for Text {
 
 impl Default for State {
     fn default() -> Self {
-        let mut entry = String::new();
+        let mut description = String::new();
         if let Some(storage) = LocalStorage::raw().get(KEY).ok() {
-            entry = storage.unwrap();
+            description = storage.unwrap();
         }
 
         State {
@@ -104,7 +101,7 @@ impl Default for State {
             name:  "<no file>".to_owned(),
             table: Table::mock(),
             entry: Entry {
-                description: "<no entry>".to_owned(),
+                description: description.to_owned(),
                 entry_editing: false,
             },
             entry_editing: false,
