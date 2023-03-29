@@ -14,3 +14,17 @@ path = "src/main.rs"
 kobold = { version = "0.5.0", git = "https://github.com/maciejhirsz/kobold.git", rev = "53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf" }
 kobold_macros = { version = "0.5.0", git = "https://github.com/maciejhirsz/kobold.git", rev = "53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf" }
 kobold_qr = { version = "0.5.0", git = "https://github.com/maciejhirsz/kobold.git", rev = "53eacf69d2ea3f25a47e58a3ccd11dcaf73d48bf" }
+compact_str = "0.7.0"
+gloo-console = "0.2.3"
+gloo-storage = "0.2.1"
+logos = "0.12.1"
+wasm-bindgen-futures = "0.4.34"
+
+[dependencies.web-sys]
+version = "0.3.61"
+features = [
+	"console",
+	"HtmlInputElement",
+	"File",
+	"FileList",
+]

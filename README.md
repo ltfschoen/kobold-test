@@ -2,6 +2,12 @@
 
 Testing the capabilities of Kobold library whilst learning Rust.
 
+### Credit
+
+The invoice example in this repository is heavily based on a combination of:
+* https://github.com/maciejhirsz/kobold/tree/master/examples/todomvc
+* https://github.com/maciejhirsz/kobold/tree/master/examples/csv_editor
+
 ### Initial Setup Log
 
 * Added example rust-toolchain.toml
@@ -66,6 +72,10 @@ fn main() {
     });
 }
 ```
+* Install dependencies
+```bash
+cargo install --path=./
+```
 * Install [Trunk](https://trunkrs.dev/#getting-started)
 * Create Trunk.toml & Paste:
 ```bash
@@ -74,7 +84,7 @@ wasm_bindgen = "0.2.84"
 ```
 * Build, watch and serve the Rust WASM web application and all its assets. Automatically opens in web browser.
 ```bash
-trunk serve --address=127.0.0.1 --open
+trunk --config ./trunk/Trunk.toml serve --address=127.0.0.1 --open
 ```
     * Note: Replace with public IP address to access externally if firewall permissions allow
 
@@ -84,7 +94,7 @@ trunk serve --address=127.0.0.1 --open
 * Install and run [Docker](https://www.docker.com/)
 * Run in Docker container
 ```bash
-./docker-dev.sh
+./scripts/docker-dev.sh
 ```
 * View website http://<PUBLIC_IP_ADDRESS>:8080
 
@@ -93,13 +103,18 @@ trunk serve --address=127.0.0.1 --open
 docker stop kobold-test && docker rm -f kobold-test
 ```
 
+* Kill all Docker containers, images, and volumes
+```
+docker system prune --all --volumes
+```
+
 ### Troubleshooting
 
 * The following was used to test if all binaries and examples and packages specified could be installed.
 ```bash
 cargo install --bins --examples --git=https://github.com/ltfschoen/kobold --branch=master --rev=2617dc3e4cff227d68e8a7ae883d8aa7cec6de6f kobold_counter_example kobold_csv_editor_example kobold_hello_world_example kobold_interval_example kobold_list_example kobold_qrcode_example kobold_stateful_example kobold_todomvc_example --verbose
 ```
-However the Cargo.toml file was updated as follows instead so it would run without error when `trunk serve`
+However the Cargo.toml file was updated as follows instead so it would run without error with `trunk serve`
 ```
 [dependencies]
 # https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#multiple-locations
@@ -113,3 +128,6 @@ kobold_qr = { version = "0.5.0", git = "https://github.com/ltfschoen/kobold.git"
         * https://github.com/rust-lang/rustup/issues/2686
         * https://github.com/actions-rust-lang/setup-rust-toolchain/blob/main/action.yml#L11
         * https://rust-lang.github.io/rustup/overrides.html#the-toolchain-file
+
+* VSCode: Cannot attach to process due to System Integrity Protection
+    * Unable to debug in VSCode with wasm-bindgen https://stackoverflow.com/questions/67032785/how-to-debug-rust-and-webassembly-program-with-vscode-and-codelldb

@@ -16,7 +16,7 @@ COPY . /${NAME_PROJECT}
 RUN /bin/sh -c set -eux && \
     sudo apt-get -y update && sudo apt-get -y upgrade && \
     sudo apt-get install -y git vim wget && \
-    . ./get_latest_nightly_version.sh && \
+    . ./scripts/get_latest_nightly_version.sh && \
     # already using a docker image has has recenty rust version but we want the latest
     rustup update && \
     # below line not necessary since logs indicate the nightly version used is overridden by rust-toolchain.toml
@@ -28,7 +28,7 @@ RUN /bin/sh -c set -eux && \
     rustup target add wasm32-unknown-unknown --toolchain "nightly-${LATEST_NIGHTLY_VERSION}" && \
     cargo install --version 0.2.84 wasm-bindgen-cli && \
     cargo +"nightly-${LATEST_NIGHTLY_VERSION}" install wasm-gc && \
-    . ./get_latest_crate_version.sh trunk && \
+    . ./scripts/get_latest_crate_version.sh trunk && \
     wget -c https://github.com/thedodd/trunk/releases/download/v${LATEST_CRATE_VERSION}/trunk-x86_64-unknown-linux-gnu.tar.gz -O - | sudo tar -xz -C /usr/local/bin && \
     cargo install --locked trunk && \
     sudo groupadd -g 1000 nonroot && \
